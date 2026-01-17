@@ -14,7 +14,7 @@ const DOMAINS = [
 	'.winning.tgirl.quest',
 	'.failing.tgirl.quest',
 ]
-const REMOVE_SECRET = await Deno.readTextFile('./credentials/handles.remove.key')
+const REMOVE_SECRET = await Deno.readTextFile('../credentials/handles.remove.key')
 
 const getMention = (data: { commit: { record: { facets: { features: { '$type': string, did: string }[] }[] } } }): any | null => {
 	let mention = null
@@ -36,12 +36,12 @@ function parseUri(uri: string): { repo: string, collection: string, rkey: string
   return { repo, collection, rkey }
 }
 
-const credential = JSON.parse(await Deno.readTextFile('./credentials/handles.json'))
-const sessionData = JSON.parse(await Deno.readTextFile('./credentials/handles.session.json') ?? '{}')
+const credential = JSON.parse(await Deno.readTextFile('../credentials/handles.json'))
+const sessionData = JSON.parse(await Deno.readTextFile('../credentials/handles.session.json') ?? '{}')
 const agent = new AtpAgent({
 	service: 'https://at.queerlil.tools',
 	persistSession: async (_event: AtpSessionEvent, session?: AtpSessionData) => {
-		if (session) await Deno.writeTextFile('./credentials/handles.session.json', JSON.stringify(session))
+		if (session) await Deno.writeTextFile('../credentials/handles.session.json', JSON.stringify(session))
 	}
 })
 

@@ -1,0 +1,9 @@
+{
+	"did": "did:plc:mydidgoeshere",
+	"accessJwt": "eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsImF1ZCI6ImRpZDp3ZWI6cGRzLmRvbWEuaW4iLCJzdWIiOiJkaWQ6cGxjOm15ZGlkZ29lc2hlcmUiLCJpYXQiOjE3NjcyMjU2MDAsImV4cCI6MTc2NzIzMjgwMH0.signature",
+	"refreshJwt": "eyJ0eXAiOiJyZWZyZXNoK2p3dCIsImFsZyI6IkhTMjU2In0.eyJzY29wZSI6ImNvbS5hdHByb3RvLnJlZnJlc2giLCJhdWQiOiJkaWQ6d2ViOnBkcy5kb21hLmluIiwic3ViIjoiZGlkOnBsYzpteWRpZGdvZXNoZXJlIiwianRpIjoic29tZXRoaW5ncmFuZG9tIiwiaWF0IjoxNzY3MjMyODAwLCJleHAiOjE3NjcyMjU2MDB9.signature",
+	"handle": "user.pds.doma.in",
+	"email": "user@mail.doma.in",
+	"emailConfirmed": true,
+	"active": true
+}

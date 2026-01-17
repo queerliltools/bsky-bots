@@ -1,0 +1,110 @@
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	server_name handles.queerlil.tools vgay.fyi is.vgay.fyi hasa.gripe doeswet.work tgirlat.work is.tgirlat.work tgirl.quest on.tgirl.quest has.tgirl.quest tgirl.mom wants.tgirl.mom has.tgirl.mom;
+	ssl_certificate /etc/nginx/handles-tls/handles.queerlil.tools.crt;
+	ssl_certificate_key /etc/nginx/handles-tls/handles.queerlil.tools.key;
+	port_in_redirect off;
+	set_real_ip_from unix:;
+	real_ip_header   X-Real-IP;
+
+	location / {
+		auth_request /.within.website/x/cmd/anubis/api/check;
+		error_page 401 = @redirectToAnubis;
+		root /var/www/handles;
+		index index.html;
+	}
+
+	location = /favicon.ico {
+		auth_request off;
+		alias /var/www/assets/favicons/handles/favicon.ico;
+		access_log off;
+		log_not_found off;
+		expires 1y;
+		add_header Cache-Control "public, immutable";
+	}
+
+	location = /robots.txt {
+		auth_request off;
+		alias /var/www/assets/robots/handles.txt;
+		access_log off;
+		log_not_found off;
+		expires 1y;
+		add_header Cache-Control "public, immutable";
+	}
+
+	location /.within.website/ {
+		proxy_pass http://anubis;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Http-Version $server_protocol;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_pass_request_body off;
+		proxy_set_header content-length "";
+		auth_request off;
+	}
+
+	location @redirectToAnubis {
+		auth_request off;
+		return 307 /.within.website/?redir=$scheme://$host$request_uri;
+	}
+}
+
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	server_name *.is.vgay.fyi *.hasa.gripe *.doeswet.work *.is.tgirlat.work *.on.tgirl.quest *.has.tgirl.quest *.wants.tgirl.mom *.has.tgirl.mom;
+	ssl_certificate /etc/nginx/handles-tls/handles.queerlil.tools.crt;
+	ssl_certificate_key /etc/nginx/handles-tls/handles.queerlil.tools.key;
+	port_in_redirect off;
+	set_real_ip_from unix:;
+	real_ip_header   X-Real-IP;
+
+	location / {
+		auth_request /.within.website/x/cmd/anubis/api/check;
+		error_page 401 = @redirectToAnubis;
+		proxy_pass http://handles_web_host:9090;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+	}
+
+	location = /favicon.ico {
+		auth_request off;
+		alias /var/www/assets/favicons/handles/favicon.ico;
+		access_log off;
+		log_not_found off;
+		expires 1y;
+		add_header Cache-Control "public, immutable";
+	}
+
+
+	location = /robots.txt {
+		auth_request off;
+		alias /var/www/assets/robots/handles.txt;
+		access_log off;
+		log_not_found off;
+		expires 1y;
+		add_header Cache-Control "public, immutable";
+	}
+
+
+	location /.within.website/ {
+		proxy_pass http://anubis;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Http-Version $server_protocol;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_pass_request_body off;
+		proxy_set_header content-length "";
+		auth_request off;
+	}
+
+	location @redirectToAnubis {
+		auth_request off;
+		return 307 /.within.website/?redir=$scheme://$host$request_uri;
+	}
+}

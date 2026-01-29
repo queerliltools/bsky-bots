@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: web
+    env: [PORT=8034]
+    ports: ["127.0.0.1:8034:8034"]
+    restart: unless-stopped

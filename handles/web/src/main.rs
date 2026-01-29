@@ -82,7 +82,10 @@ fn error(host: &str, file_name: &str, status_code: StatusCode, msg: String) -> R
 
 #[tokio::main]
 async fn main() {
-    let addr = ([0, 0, 0, 0], 9090).into();
+    let port = std::env::var("PORT").expect("no port provided");
+    let port: u16 = port.parse().unwrap_or(9090);
+    //let addr = ([0, 0, 0, 0], port).into();
+    let addr = ([127, 0, 0, 1], port).into();
 
     let make_svc = make_service_fn(|_| async {
         Ok::<_, Infallible>(service_fn(handle))

@@ -42,9 +42,10 @@ process {
 end {
 	$ResponseHeaders = @(
 		"Status: $StatusCode",
-		"Content-Type: application/json",
+		'Content-Type: application/json',
 		"Content-Length: $($ResponseBody.Length)",
-		"Server: cgi.queerlil.tools"
+		'Server: cgi.queerlil.tools',
+		'Access-Control-Allow-Origin: *'
 	)
 	$ResponseHeaders.ForEach{$_}
 	''
